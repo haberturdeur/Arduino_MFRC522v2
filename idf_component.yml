@@ -1,0 +1,6 @@
+dependencies:
+  idf:
+    version: ">=5.4.0"
+  arduino-esp32:
+      git: https://github.com/espressif/arduino-esp32.git
+      version: idf-release/v5.4
