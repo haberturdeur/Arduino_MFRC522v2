@@ -14,7 +14,6 @@
 #define __STDC_LIMIT_MACROS
 
 #include <stdint.h>
-#include <Arduino.h>
 #include <MFRC522Constants.h>
 #include <MFRC522Driver.h>
 
@@ -25,8 +24,7 @@
 //
 // Version 0.0 (0x90)
 // Philips Semiconductors; Preliminary Specification Revision 2.0 - 01 August 2005; 16.1 self-test
-const byte MFRC522_firmware_referenceV0_0[]
-           PROGMEM = {
+const std::uint8_t MFRC522_firmware_referenceV0_0[] = {
            0x00, 0x87, 0x98, 0x0f, 0x49, 0xFF, 0x07, 0x19,
            0xBF, 0x22, 0x30, 0x49, 0x59, 0x63, 0xAD, 0xCA,
            0x7F, 0xE3, 0x4E, 0x03, 0x5C, 0x4E, 0x49, 0x50,
@@ -38,8 +36,7 @@ const byte MFRC522_firmware_referenceV0_0[]
            };
 // Version 1.0 (0x91)
 // NXP Semiconductors; Rev. 3.8 - 17 September 2014; 16.1.1 self-test
-const byte MFRC522_firmware_referenceV1_0[]
-           PROGMEM = {
+const std::uint8_t MFRC522_firmware_referenceV1_0[] = {
            0x00, 0xC6, 0x37, 0xD5, 0x32, 0xB7, 0x57, 0x5C,
            0xC2, 0xD8, 0x7C, 0x4D, 0xD9, 0x70, 0xC7, 0x73,
            0x10, 0xE6, 0xD2, 0xAA, 0x5E, 0xA1, 0x3E, 0x5A,
@@ -51,8 +48,7 @@ const byte MFRC522_firmware_referenceV1_0[]
            };
 // Version 2.0 (0x92)
 // NXP Semiconductors; Rev. 3.8 - 17 September 2014; 16.1.1 self-test
-const byte MFRC522_firmware_referenceV2_0[]
-           PROGMEM = {
+const std::uint8_t MFRC522_firmware_referenceV2_0[] = {
            0x00, 0xEB, 0x66, 0xBA, 0x57, 0xBF, 0x23, 0x95,
            0xD0, 0xE3, 0x0D, 0x3D, 0x27, 0x89, 0x5C, 0xDE,
            0x9D, 0x3B, 0xA7, 0x00, 0x21, 0x5B, 0x89, 0x82,
@@ -64,8 +60,7 @@ const byte MFRC522_firmware_referenceV2_0[]
            };
 // Clone
 // Fudan Semiconductor FM17522 (0x88)
-const byte FM17522_firmware_reference88[]
-           PROGMEM = {
+const std::uint8_t FM17522_firmware_reference88[] = {
            0x00, 0xD6, 0x78, 0x8C, 0xE2, 0xAA, 0x0C, 0x18,
            0x2A, 0xB8, 0x7A, 0x7F, 0xD3, 0x6A, 0xCF, 0x0B,
            0xB1, 0x37, 0x63, 0x4B, 0x69, 0xAE, 0x91, 0xC7,
@@ -76,8 +71,7 @@ const byte FM17522_firmware_reference88[]
            0x56, 0x9A, 0x98, 0x82, 0x26, 0xEA, 0x2A, 0x62
            };
 // Another "FM17522" ic form Aliexpress
-const byte FM17522_firmware_referenceB2[]
-           PROGMEM = {
+const std::uint8_t FM17522_firmware_referenceB2[] = {
            0x00, 0xeb, 0x44, 0x85, 0xfa, 0x9a, 0x78, 0x01,
            0x74, 0xe5, 0x1c, 0x7a, 0x0a, 0xa0, 0x71, 0xe1,
            0xf3, 0xfa, 0x96, 0x6d, 0x28, 0xa1, 0x34, 0x46,
@@ -88,8 +82,7 @@ const byte FM17522_firmware_referenceB2[]
            0x2b, 0xcb, 0x8a, 0xb2, 0x45, 0xdd, 0x7e, 0x3c
            };
 // Fudan Semiconductor FM17522E (0x89)
-const byte FM17522E_firmware_reference[]
-           PROGMEM = {
+const std::uint8_t FM17522E_firmware_reference[] = {
            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -115,7 +108,7 @@ public:
   using MIFARE_Key = MFRC522Constants::MIFARE_Key;
   
   // Size of the MFRC522 FIFO
-  static constexpr byte FIFO_SIZE = 64;    // The FIFO is 64 bytes.
+  static constexpr std::uint8_t FIFO_SIZE = 64;    // The FIFO is 64 bytes.
   
   // Member variables
   Uid uid;                // Used by PICC_ReadCardSerial().
@@ -128,9 +121,9 @@ public:
   /////////////////////////////////////////////////////////////////////////////////////
   // Basic interface functions for communicating with the MFRC522
   /////////////////////////////////////////////////////////////////////////////////////
-  void PCD_SetRegisterBitMask(PCD_Register reg, byte mask);
-  void PCD_ClearRegisterBitMask(PCD_Register reg, byte mask);
-  StatusCode PCD_CalculateCRC(byte *data, byte length, byte *result);
+  void PCD_SetRegisterBitMask(PCD_Register reg, std::uint8_t mask);
+  void PCD_ClearRegisterBitMask(PCD_Register reg, std::uint8_t mask);
+  StatusCode PCD_CalculateCRC(std::uint8_t *data, std::uint8_t length, std::uint8_t *result);
   
   /////////////////////////////////////////////////////////////////////////////////////
   // Functions for manipulating the MFRC522
@@ -139,8 +132,8 @@ public:
   void PCD_Reset();
   void PCD_AntennaOn();
   void PCD_AntennaOff();
-  byte PCD_GetAntennaGain();
-  void PCD_SetAntennaGain(byte mask);
+  std::uint8_t PCD_GetAntennaGain();
+  void PCD_SetAntennaGain(std::uint8_t mask);
   
   PCD_Version PCD_GetVersion();
   bool PCD_PerformSelfTest();
@@ -154,38 +147,38 @@ public:
   /////////////////////////////////////////////////////////////////////////////////////
   // Functions for communicating with PICCs
   /////////////////////////////////////////////////////////////////////////////////////
-  StatusCode PCD_TransceiveData(byte *sendData, byte sendLen, byte *backData, byte *backLen, byte *validBits = nullptr, byte rxAlign = 0, bool checkCRC = false);
-  StatusCode PCD_CommunicateWithPICC(byte command, byte waitIRq, byte *sendData, byte sendLen, byte *backData = nullptr, byte *backLen = nullptr, byte *validBits = nullptr, byte rxAlign = 0, bool checkCRC = false);
-  StatusCode PICC_RequestA(byte *bufferATQA, byte *bufferSize);
-  StatusCode PICC_WakeupA(byte *bufferATQA, byte *bufferSize);
-  StatusCode PICC_REQA_or_WUPA(byte command, byte *bufferATQA, byte *bufferSize);
-  virtual StatusCode PICC_Select(Uid *uid, byte validBits = 0);
+  StatusCode PCD_TransceiveData(std::uint8_t *sendData, std::uint8_t sendLen, std::uint8_t *backData, std::uint8_t *backLen, std::uint8_t *validBits = nullptr, std::uint8_t rxAlign = 0, bool checkCRC = false);
+  StatusCode PCD_CommunicateWithPICC(std::uint8_t command, std::uint8_t waitIRq, std::uint8_t *sendData, std::uint8_t sendLen, std::uint8_t *backData = nullptr, std::uint8_t *backLen = nullptr, std::uint8_t *validBits = nullptr, std::uint8_t rxAlign = 0, bool checkCRC = false);
+  StatusCode PICC_RequestA(std::uint8_t *bufferATQA, std::uint8_t *bufferSize);
+  StatusCode PICC_WakeupA(std::uint8_t *bufferATQA, std::uint8_t *bufferSize);
+  StatusCode PICC_REQA_or_WUPA(std::uint8_t command, std::uint8_t *bufferATQA, std::uint8_t *bufferSize);
+  virtual StatusCode PICC_Select(Uid *uid, std::uint8_t validBits = 0);
   StatusCode PICC_HaltA();
   
   /////////////////////////////////////////////////////////////////////////////////////
   // Functions for communicating with MIFARE PICCs
   /////////////////////////////////////////////////////////////////////////////////////
-  StatusCode PCD_Authenticate(byte command, byte blockAddr, MIFARE_Key *key, Uid *uid);
+  StatusCode PCD_Authenticate(std::uint8_t command, std::uint8_t blockAddr, MIFARE_Key *key, Uid *uid);
   void PCD_StopCrypto1();
-  StatusCode MIFARE_Read(byte blockAddr, byte *buffer, byte *bufferSize);
-  StatusCode MIFARE_Write(byte blockAddr, byte *buffer, byte bufferSize);
-  StatusCode MIFARE_Ultralight_Write(byte page, byte *buffer, byte bufferSize);
-  StatusCode MIFARE_Decrement(byte blockAddr, int32_t delta);
-  StatusCode MIFARE_Increment(byte blockAddr, int32_t delta);
-  StatusCode MIFARE_Restore(byte blockAddr);
-  StatusCode MIFARE_Transfer(byte blockAddr);
-  StatusCode MIFARE_GetValue(byte blockAddr, int32_t *value);
-  StatusCode MIFARE_SetValue(byte blockAddr, int32_t value);
-  StatusCode PCD_NTAG216_AUTH(const byte password[4], byte pACK[]);
+  StatusCode MIFARE_Read(std::uint8_t blockAddr, std::uint8_t *buffer, std::uint8_t *bufferSize);
+  StatusCode MIFARE_Write(std::uint8_t blockAddr, std::uint8_t *buffer, std::uint8_t bufferSize);
+  StatusCode MIFARE_Ultralight_Write(std::uint8_t page, std::uint8_t *buffer, std::uint8_t bufferSize);
+  StatusCode MIFARE_Decrement(std::uint8_t blockAddr, int32_t delta);
+  StatusCode MIFARE_Increment(std::uint8_t blockAddr, int32_t delta);
+  StatusCode MIFARE_Restore(std::uint8_t blockAddr);
+  StatusCode MIFARE_Transfer(std::uint8_t blockAddr);
+  StatusCode MIFARE_GetValue(std::uint8_t blockAddr, int32_t *value);
+  StatusCode MIFARE_SetValue(std::uint8_t blockAddr, int32_t value);
+  StatusCode PCD_NTAG216_AUTH(const std::uint8_t password[4], std::uint8_t pACK[]);
   
   /////////////////////////////////////////////////////////////////////////////////////
   // Support functions
   /////////////////////////////////////////////////////////////////////////////////////
-  StatusCode PCD_MIFARE_Transceive(byte *sendData, byte sendLen, bool acceptTimeout = false);
-  static PICC_Type PICC_GetType(byte sak);
+  StatusCode PCD_MIFARE_Transceive(std::uint8_t *sendData, std::uint8_t sendLen, bool acceptTimeout = false);
+  static PICC_Type PICC_GetType(std::uint8_t sak);
   
   // Advanced functions for MIFARE
-  void MIFARE_CalculateAccessBits(byte accessBitBuffer[3], const byte g0, const byte g1, const byte g2, const byte g3) const;
+  void MIFARE_CalculateAccessBits(std::uint8_t accessBitBuffer[3], const std::uint8_t g0, const std::uint8_t g1, const std::uint8_t g2, const std::uint8_t g3) const;
   
   /////////////////////////////////////////////////////////////////////////////////////
   // Convenience functions - does not add extra functionality
@@ -197,7 +190,7 @@ protected:
   MFRC522Driver &_driver;
   
   // Functions for communicating with MIFARE PICCs
-  StatusCode MIFARE_TwoStepHelper(byte command, byte blockAddr, int32_t data);
+  StatusCode MIFARE_TwoStepHelper(std::uint8_t command, std::uint8_t blockAddr, int32_t data);
 };
 
 #endif

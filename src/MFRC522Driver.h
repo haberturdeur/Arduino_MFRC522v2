@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: LGPL-2.1 */
 #pragma once
 
-#include <Arduino.h>
 #include <MFRC522Constants.h>
 
 #define __STDC_LIMIT_MACROS
@@ -21,10 +20,10 @@ public:
   /////////////////////////////////////////////////////////////////////////////////////
   // Basic interface functions for communicating with the MFRC522
   /////////////////////////////////////////////////////////////////////////////////////
-  virtual void PCD_WriteRegister(const PCD_Register reg, const byte value) = 0;
-  virtual void PCD_WriteRegister(const PCD_Register reg, const byte count, byte *const values) = 0;
-  virtual byte PCD_ReadRegister(const PCD_Register reg) = 0;
-  virtual void PCD_ReadRegister(const PCD_Register reg, const byte count, byte *const values, const byte rxAlign = 0) = 0;
+  virtual void PCD_WriteRegister(const PCD_Register reg, const std::uint8_t value) = 0;
+  virtual void PCD_WriteRegister(const PCD_Register reg, const std::uint8_t count, std::uint8_t *const values) = 0;
+  virtual std::uint8_t PCD_ReadRegister(const PCD_Register reg) = 0;
+  virtual void PCD_ReadRegister(const PCD_Register reg, const std::uint8_t count, std::uint8_t *const values, const std::uint8_t rxAlign = 0) = 0;
   
   /////////////////////////////////////////////////////////////////////////////////////
   MFRC522Driver() = default;

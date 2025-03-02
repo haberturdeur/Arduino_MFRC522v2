@@ -1,9 +1,11 @@
 /* SPDX-License-Identifier: LGPL-2.1 */
 #pragma once
 
-#include <Arduino.h>
 #include <MFRC522v2.h>
 #include <MFRC522Debug.h>
+
+#include <iostream>
+#include <cstdint>
 
 class MFRC522Hack {
 private:
@@ -11,16 +13,16 @@ private:
   using PICC_Command = MFRC522Constants::PICC_Command;
   MFRC522 &_device;
   bool _logErrors;
-  Print *_logPrint; // Injected Arduino API could be replaced by void* if required.
+  std::ostream *_logStream;
 
 public:
-  MFRC522Hack(MFRC522 &device, const bool logErrors, Print *logPrint = nullptr) : _device(device), _logPrint(logPrint) {
-    _logErrors = logErrors && (logPrint != nullptr);
+  MFRC522Hack(MFRC522 &device, const bool logErrors, std::ostream *logStream = nullptr) : _device(device), _logStream(logStream) {
+    _logErrors = logErrors && (logStream != nullptr);
   };
   
   bool MIFARE_OpenUidBackdoor(void) const;
   
-  bool MIFARE_SetUid(const byte *const newUid, const byte uidSize, MFRC522::MIFARE_Key &key, bool withBackdoor) const;
+  bool MIFARE_SetUid(const std::uint8_t *const newUid, const std::uint8_t uidSize, MFRC522::MIFARE_Key &key, bool withBackdoor) const;
   
   bool MIFARE_UnbrickUidSector(void) const;
 };
